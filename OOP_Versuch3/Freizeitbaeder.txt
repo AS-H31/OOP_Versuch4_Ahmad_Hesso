@@ -1,0 +1,19 @@
+Daten des Freizeitbads:
+Name des Freizeitbads	test bad
+Öffnungszeiten des Freizeitbads	8.0 - 12.0
+Beckenlänge des Freizeitbads	44
+Wassertemperatur des Freizeitbads	33Daten des Freizeitbads:
+Name des Freizeitbads	1
+Öffnungszeiten des Freizeitbads	2.0 - 3.0
+Beckenlänge des Freizeitbads	4
+Wassertemperatur des Freizeitbads	5
+Daten des Freizeitbads:
+Name des Freizeitbads	4
+Öffnungszeiten des Freizeitbads	5.0 - 6.0
+Beckenlänge des Freizeitbads	7
+Wassertemperatur des Freizeitbads	8
+Daten des Freizeitbads:
+Name des Freizeitbads	1
+Öffnungszeiten des Freizeitbads	2.0 - 4.0
+Beckenlänge des Freizeitbads	5
+Wassertemperatur des Freizeitbads	6
