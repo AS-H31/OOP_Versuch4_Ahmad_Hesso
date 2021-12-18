@@ -138,18 +138,12 @@ public class FreizeitbaederView {
 //	        } 
 //   	    });
 	    
-	    mnItmCsvExport.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent event) {
+	    mnItmCsvExport.setOnAction( handlerCsv -> {
 				schreibeFreizeitbaederInDatei("csv");
-			}
 	    });
 	    
-	    mnItmTxtExport.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent event) {
+	    mnItmTxtExport.setOnAction( handlerTxt -> {
 				schreibeFreizeitbaederInDatei("txt");
-			}
 		});
     }
    
