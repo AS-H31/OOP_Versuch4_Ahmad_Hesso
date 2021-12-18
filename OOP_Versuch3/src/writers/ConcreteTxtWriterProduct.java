@@ -25,7 +25,7 @@ public class ConcreteTxtWriterProduct extends WriterProduct{
 					"Name des Freizeitbads\t" + fzb.getName() + "\n"+
 					"Öffnungszeiten des Freizeitbads\t" + fzb.getGeoeffnetVon() + " - " + fzb.getGeoeffnetBis() + "\n"+
 					"Beckenlänge des Freizeitbads\t" + fzb.getBeckenlaenge() + "\n" +
-					"Wassertemperatur des Freizeitbads\t" + fzb.getTemperatur()
+					"Wassertemperatur des Freizeitbads\t" + fzb.getTemperatur() + "\n"
 				);
 
 	}

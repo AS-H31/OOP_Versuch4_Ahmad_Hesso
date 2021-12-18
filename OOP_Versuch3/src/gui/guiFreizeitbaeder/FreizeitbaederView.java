@@ -54,7 +54,7 @@ public class FreizeitbaederView {
     private TextField txtWassTemperatur	= new TextField();
     private TextArea txtAnzeige  		= new TextArea();
     private Button btnEingabe 		 	= new Button("Eingabe");
-    private Button btnAnzeige 		 	= new Button("Anzeige");
+    //private Button btnAnzeige 		 	= new Button("Anzeige");
     private MenuBar mnbrMenuLeiste  	= new MenuBar();
     private Menu mnDatei             	= new Menu("Datei");
     private MenuItem mnItmCsvExport 	= new MenuItem("csv-Export");
@@ -112,9 +112,9 @@ public class FreizeitbaederView {
         // Buttons
         btnEingabe.setLayoutX(20);
         btnEingabe.setLayoutY(290);
-        btnAnzeige.setLayoutX(310);
-        btnAnzeige.setLayoutY(290);
-        pane.getChildren().addAll(btnEingabe, btnAnzeige); 
+        //btnAnzeige.setLayoutX(310);
+        //btnAnzeige.setLayoutY(290);
+        pane.getChildren().addAll(btnEingabe); 
         
  		// Menu
    	    this.mnbrMenuLeiste.getMenus().add(mnDatei);
@@ -131,12 +131,12 @@ public class FreizeitbaederView {
         	    freiModel.notifyObserver();
             }
 	    });
-	    btnAnzeige.setOnAction(new EventHandler<ActionEvent>() {
-	    	@Override
-	        public void handle(ActionEvent e) {
-	            zeigeFreizeitbaederAn();
-	        } 
-   	    });
+//	    btnAnzeige.setOnAction(new EventHandler<ActionEvent>() {
+//	    	@Override
+//	        public void handle(ActionEvent e) {
+//	            zeigeFreizeitbaederAn();
+//	        } 
+//   	    });
 	    
 	    mnItmCsvExport.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
@@ -164,23 +164,26 @@ public class FreizeitbaederView {
    		    txtWassTemperatur.getText()
    		    );
    		
-   		freiModel.setFreizeitbad(freizeitbad);
-   		//zeigeInformationsfensterAn("Das Freizeitbad wurde aufgenommen!");
+   		freiModel.addFreizeitbad(freizeitbad);
+   			zeigeInformationsfensterAn("Das Freizeitbad wurde aufgenommen!");
       	}
       	catch(PlausiException exc){
       		zeigeFehlermeldungsfensterAn(exc.getPlausiTyp() + "er ", exc.getMessage());
     	} 
    }
   
-   public void zeigeFreizeitbaederAn(){
-   	if(freiModel.getFreizeitbad() != null){
-   		txtAnzeige.setText(
-   				freiModel.getFreizeitbad().gibFreizeitbadZurueck(' '));
-   	}
-   	else{
-   		zeigeInformationsfensterAn("Bisher wurde kein Freizeitbad aufgenommen!");
-   	}
-   }	
+   public void zeigeFreizeitbaederAn() {
+		if (freiModel.getFreizeitbaeder().size() > 0) {
+			StringBuffer text = new StringBuffer();
+			// Ergaenzen: for each – Schleife ueber ArrayList
+			for (Freizeitbad fzb : freiModel.getFreizeitbaeder()) {
+				text.append(fzb.gibFreizeitbadZurueck(' ') + "\n");
+			}
+			this.txtAnzeige.setText(text.toString());
+		} else {
+			zeigeInformationsfensterAn("Bisher wurde kein Freizeitbad aufgenommen!");
+		}
+	}	
 
    void zeigeInformationsfensterAn(String meldung){
    	new MeldungsfensterAnzeiger(AlertType.INFORMATION,

@@ -14,7 +14,7 @@ import writers.WriterProduct;
 public class FreizeitbaederModel implements Observable{
 	
 	private List<Observer> observers = new ArrayList<Observer>();
-    private Freizeitbad freizeitbad;
+    private ArrayList<Freizeitbad> freizeitbaeder = new ArrayList<Freizeitbad>();
     private static FreizeitbaederModel instanceModel;
 
     private FreizeitbaederModel() {    }
@@ -26,13 +26,13 @@ public class FreizeitbaederModel implements Observable{
     	return instanceModel;
     }
     
-	public Freizeitbad getFreizeitbad() {
-		return freizeitbad;
+	public ArrayList<Freizeitbad> getFreizeitbaeder() {
+		return freizeitbaeder;
 	}
 
 
-	public void setFreizeitbad(Freizeitbad freizeitbad) {
-		this.freizeitbad = freizeitbad;
+	public void addFreizeitbad(Freizeitbad freizeitbad) {
+		this.freizeitbaeder.add(freizeitbad);
 	}
 
 
@@ -41,8 +41,11 @@ public class FreizeitbaederModel implements Observable{
 			WriterCreator writerCreator= new ConcreteCsvWriterCreator();
 			WriterProduct writerProduct= writerCreator.factoryMethod();
 			
-			writerProduct.fuegeInDateiHinzu(this.freizeitbad);
-			writerProduct.schliesseDatei();
+			for (Freizeitbad freizeitbad : this.freizeitbaeder) {
+				writerProduct.fuegeInDateiHinzu(freizeitbad);
+			}
+			writerProduct.schliesseDatei();	
+			
 		} catch (IOException e) {
 			System.out.print("IO Fehler");
 		}
@@ -54,8 +57,11 @@ public class FreizeitbaederModel implements Observable{
 			WriterCreator writerCreator= new ConcreteTxtWriterCreator();
 			WriterProduct writerProduct= writerCreator.factoryMethod();
 			
-			writerProduct.fuegeInDateiHinzu(this.freizeitbad);
-			writerProduct.schliesseDatei();
+			for (Freizeitbad freizeitbad : this.freizeitbaeder) {
+				writerProduct.fuegeInDateiHinzu(freizeitbad);
+			}
+			writerProduct.schliesseDatei();	
+		
 		} catch (IOException e) {
 			System.out.print("IO Fehler");
 		}		

@@ -20,7 +20,7 @@ public class ConcreteCsvWriterProduct extends WriterProduct {
 	@Override
 	public void fuegeInDateiHinzu(Object obj) throws IOException {
 		Freizeitbad fzb = (Freizeitbad) obj;
-		aus.write(fzb.gibFreizeitbadZurueck(';'));
+		aus.write(fzb.gibFreizeitbadZurueck(';') + "\n");
 
 	}
 

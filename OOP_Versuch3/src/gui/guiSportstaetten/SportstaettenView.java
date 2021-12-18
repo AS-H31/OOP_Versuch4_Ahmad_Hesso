@@ -1,5 +1,6 @@
 package gui.guiSportstaetten;
    
+import business.Freizeitbad;
 import business.FreizeitbaederModel;
 import javafx.event.*;
 import javafx.scene.Scene;
@@ -23,7 +24,7 @@ public class SportstaettenView {
     	private Label lblAnzeigeFreizeitbaeder     
  		= new Label("Anzeige Freizeitbäder");
     	private TextArea txtAnzeigeFreizeitbaeder  = new TextArea();
-    	private Button btnAnzeigeFreizeitbaeder = new Button("Anzeige");
+    	//private Button btnAnzeigeFreizeitbaeder = new Button("Anzeige");
     	//-------Ende Attribute der grafischen Oberflaeche-------
     
     	public SportstaettenView(SportstaettenControl sportControl, Stage fenstersportstaetten,
@@ -57,32 +58,33 @@ public class SportstaettenView {
     		txtAnzeigeFreizeitbaeder.setPrefHeight(185);
        	pane.getChildren().add(txtAnzeigeFreizeitbaeder);        	
         	// Button
-          	btnAnzeigeFreizeitbaeder.setLayoutX(310);
-        	btnAnzeigeFreizeitbaeder.setLayoutY(290);
-        	pane.getChildren().add(btnAnzeigeFreizeitbaeder); 
+          	//btnAnzeigeFreizeitbaeder.setLayoutX(310);
+        	//btnAnzeigeFreizeitbaeder.setLayoutY(290);
+        	//pane.getChildren().add(btnAnzeigeFreizeitbaeder); 
    }
    
    private void initListener() {
-	    btnAnzeigeFreizeitbaeder.setOnAction(
- 			new EventHandler<ActionEvent>() {
-	    		@Override
-	        	public void handle(ActionEvent e) {
-	            	zeigeFreizeitbaederAn();
-	    		} 
-   	    });
+//	    btnAnzeigeFreizeitbaeder.setOnAction(
+// 			new EventHandler<ActionEvent>() {
+//	    		@Override
+//	        	public void handle(ActionEvent e) {
+//	            	zeigeFreizeitbaederAn();
+//	    		} 
+//   	    });
     }
    
-    public void zeigeFreizeitbaederAn(){
-		if(freiModel.getFreizeitbad() != null){
-			txtAnzeigeFreizeitbaeder.setText(
-				freiModel.getFreizeitbad()
-			.gibFreizeitbadZurueck(' '));
+	public void zeigeFreizeitbaederAn() {
+		if (freiModel.getFreizeitbaeder().size() > 0) {
+			StringBuffer text = new StringBuffer();
+			// Ergaenzen: for each – Schleife ueber ArrayList
+			for (Freizeitbad fzb : freiModel.getFreizeitbaeder()){
+				text.append(fzb.gibFreizeitbadZurueck(' ') + "\n");
+			}
+			this.txtAnzeigeFreizeitbaeder.setText(text.toString());
+		} else {
+			zeigeInformationsfensterAn("Bisher wurde kein Freizeitbad aufgenommen!");
 		}
-		else{
-			zeigeInformationsfensterAn(
-			"Bisher wurde kein Freizeitbad aufgenommen!");
-		}
-    }	
+	}	
    
     private void zeigeInformationsfensterAn(String meldung){
     	  	new MeldungsfensterAnzeiger(AlertType.INFORMATION,
