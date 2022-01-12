@@ -151,7 +151,7 @@ public class SportstaettenView {
     private void zeigeInformationsfensterAn(String meldung){
 	  	new MeldungsfensterAnzeiger(AlertType.INFORMATION,
            	"Information", meldung).zeigeMeldungsfensterAn();
-}	
+    }	
     
 }
 
