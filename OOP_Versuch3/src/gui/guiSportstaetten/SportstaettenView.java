@@ -1,7 +1,5 @@
 package gui.guiSportstaetten;
    
-import java.io.IOException;
-
 import business.Freizeitbad;
 import business.FreizeitbaederModel;
 import business.SporthallenModel;
@@ -49,10 +47,11 @@ public class SportstaettenView {
     		this.sportControl = sportControl;
 
 
-		this.initKomponenten();
-		this.initListener();
+			this.initKomponentenFreizeitbaeder();
+			this.initKomponentenSporthallen();
+			this.initListener();
     	}
-    	private void initKomponenten(){
+    	private void initKomponentenFreizeitbaeder(){
     		// Label
  		Font font = new Font("Arial", 20);
  		// Freizeitbaeder
@@ -74,7 +73,10 @@ public class SportstaettenView {
         	btnAnzeigeFreizeitbaeder.setLayoutY(290);
         	pane.getChildren().add(btnAnzeigeFreizeitbaeder); 
         	
-        // Sporthallen
+   }
+    	private void initKomponentenSporthallen(){
+     	Font font = new Font("Arial", 20);
+    	// Sporthallen
        	lblAnzeigeSporthallen.setLayoutX(20);
        		lblAnzeigeSporthallen.setLayoutY(40);
        		lblAnzeigeSporthallen.setFont(font);
@@ -92,7 +94,6 @@ public class SportstaettenView {
           	btnAnzeigeSporthallen.setLayoutY(290);
         	pane.getChildren().add(btnAnzeigeSporthallen); 
    }
-   
    private void initListener() {
 	    btnAnzeigeFreizeitbaeder.setOnAction(
  			new EventHandler<ActionEvent>() {
@@ -106,15 +107,6 @@ public class SportstaettenView {
  			new EventHandler<ActionEvent>() {
 	    		@Override
 	        	public void handle(ActionEvent e) {
-	    			try {
-						sporthallenModel.leseSporthallenAusCsvDatei();
-					} catch (IOException e1) {
-						// TODO Auto-generated catch block
-						zeigeInformationsfensterAn("IO Exception");
-					} catch (PlausiException e1) {
-						// TODO Auto-generated catch block
-						zeigeInformationsfensterAn("PlusiException Exception");
-					}
 	            	zeigeSporthallenAn();
 	    		} 
    	    });
@@ -136,6 +128,7 @@ public class SportstaettenView {
    
    // Sporthallen 
 	public void zeigeSporthallenAn() {
+		this.sportControl.leseDateiausCsv();
 		if (sporthallenModel.getSporthallen().size() > 0) {
 			StringBuffer text = new StringBuffer();
 			// Ergaenzen: for each – Schleife ueber ArrayList
@@ -148,7 +141,7 @@ public class SportstaettenView {
 		}
 	}	
    	
-    private void zeigeInformationsfensterAn(String meldung){
+    public void zeigeInformationsfensterAn(String meldung){
 	  	new MeldungsfensterAnzeiger(AlertType.INFORMATION,
            	"Information", meldung).zeigeMeldungsfensterAn();
     }	
